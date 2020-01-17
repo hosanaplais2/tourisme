@@ -1,0 +1,71 @@
+﻿@model IEnumerable<tourisme.site>
+
+@{
+    ViewBag.Title = "Liste des sites touristiques";
+
+}
+
+<div class="jumbotron">
+    <h1>Liste des sites touristiques</h1>
+    <p class="lead">Cliquer le boutton ci-dessous pour ajouter des nouveau sites touristiques</p>
+</div>
+<span class="btn btn-default">
+    <i class="glyphicon-plus"></i>
+   @Html.ActionLink("Ajouter nouveau ", "CreerSite")
+
+</span>
+<table class="table table-light table-bordered" id="dataTables" style="text-align: center;">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumSite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomSite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lieu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TarifJournaliere)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumSite)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomSite)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lieu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TarifJournaliere)
+                </td>
+                <td>
+                    <span class="btn btn-default">
+                        @Html.ActionLink("Editer", "EditerSite", new { id = item.NumSite })
+                    </span>
+                    <span class="btn btn-default">
+                        @Html.ActionLink("Details", "DetailsSite", new { id = item.NumSite })
+                    </span>
+                    <span class="btn btn-default">
+                        @Html.ActionLink("Supprimmer", "SupprimmerSite", new { id = item.NumSite })
+                    </span>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h3>@ViewBag.Message</h3>
+
+<script>
+    
+
+</script>

@@ -1,0 +1,49 @@
+﻿@model tourisme.site
+
+@{
+    ViewBag.Title = "Suppression Site touristiques";
+
+}
+
+<h3>Vous etes sur de vouloir le supprimmer</h3>
+<div>
+    <h4>site tourisque </h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomSite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomSite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lieu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TarifJournaliere)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TarifJournaliere)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+    <input type="text" id="NumSiteSupp" name="NumSiteSupp" value=@ViewBag.Message readonly="readonly" hidden="hidden" />
+        <div class="form-actions no-color">
+            
+           
+            <input type="submit" value="Supprimmer" class="btn btn-danger" /> |
+            @Html.ActionLink("Annuler", "Listsite")
+        </div>
+    }
+</div>

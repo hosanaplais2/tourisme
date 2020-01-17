@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    <script type="text/javascript">
+    function tableJson(table) {
+        var data = [];
+
+        var header = [];
+        for (var i = 0; i < table.rows[0].cells.length; i++) {
+            header[i] = table.rows[0].cells[i].innerHTML;
+        }
+        data.push(header);
+        for (var i = 0; i < table.rows.length; i++) {
+            var tablerow = table.rows[i];
+            var rowData = {};
+
+            for (var j = 0; j < tablerow.cells.length; j++) {
+                rowData[header[j]] = tablerow.cells[j].innerHTML;
+            }
+            data.push(rowData);
+        }
+        return data;
+    }
+
+    function downloadpdf() {
+        var table = tableJson($('#Tables').get(0));
+        var doc = new jsPDF('l', 'pt', 'letter', true);
+
+        
+       
+        doc.save('/details.pdf');
+    }
+
+    </script>
+
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Acceuil", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Site Touristique", "Listsite", "Site")</li>
+                    <li>@Html.ActionLink("Les Visiteurs", "listvisiteur", "Visiteur")</li>
+                    <li>@Html.ActionLink("Les Visiteurs", "listvisite", "Visite")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+    <link rel="stylesheet" href="~/Content/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="~/Content/jquery.dataTables.css">
+    <script type="text/javascript" src="~/Scripts/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.highchartTable.js"></script>
+    <script type="text/javascript" src="~/Scripts/jspdf.js"></script>
+    <script type="text/javascript">var i = 1;</script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#dataTables').DataTable({
+                "language" :{
+                    "emptyTable": "Aucun données dans cette table",
+                    "info": "Affichage _START_ à _END_ de _TOTAL_ enregistrements",
+                    "infoEmpty": "Affichage 0 to 0 of 0 enregistrements",
+                    "infoFiltered": "(filtered from _MAX_ total entries)",
+                    "infoPostFix": "",
+                    "lengthMenu": "Afficher _MENU_ enregistrements",
+                    "loadingRecords": "Chargement...",
+                    "processing": "Processing...",
+                    "search": "Recherche ici :",
+                    "zeroRecords": "Aucun résultat n'est trouvé",
+                    "paginate": {
+                        "first": "Premier",
+                        "previous": "précedent",
+                        "next": "Suivant",
+                        "last": "Dernier"
+                    },
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    },
+                    "decimal": "",
+                    "thousands": ","
+
+                }
+            });
+        });
+
+        $('.btnpdf').click(function () {
+            var print = document.getElementById('Tables');
+            var doc = window.open("", "", "width:700,height:900");
+            doc.document.write(print.outerHTML);
+            doc.document.close();
+            doc.focus();
+            doc.print();
+            doc.close();
+        })
+    </script>
+</body>
+</html>

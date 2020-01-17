@@ -1,0 +1,61 @@
+﻿@model IEnumerable<tourisme.visiteur>
+@{
+    ViewBag.Title = "Liste des visiteurs";
+
+}
+
+<div class="jumbotron">
+    <h1>Liste des visiteurs repertoriés</h1>
+    <p class="lead">Cliquer le boutton ci-dessous pour des nouveau visiteurs</p>
+</div>
+<span class="btn btn-default"><i class="glyphicon-plus" ></i>
+        @Html.ActionLink("nouveau visiteur", "CreerVisiteur")
+    
+</span>
+
+<table class ="table table-light table-bordered" id="dataTables" style="text-align: center;">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumVisiteur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomVisiteur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adresse)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumVisiteur)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomVisiteur)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Adresse)
+                </td>
+                <td>
+                    <span class="btn btn-default">
+                        @Html.ActionLink("Editer", "EditerVisiteur", new { id = item.NumVisiteur })
+                    </span>
+                    <span class="btn btn-default">
+                        @Html.ActionLink("Visiter", "Visiter", new { id = item.NumVisiteur })
+                    </span>
+                    <span class="btn btn-default">
+                        @Html.ActionLink("Details", "Details", new { id = item.NumVisiteur })
+                    </span>
+                    <span class="btn btn-default">
+                        @Html.ActionLink("Supprimmer", "SupprimmerVisiteur", new { id = item.NumVisiteur })
+                    </span>
+                </td>
+            </tr>
+        }
+    </tbody>
+    </table>

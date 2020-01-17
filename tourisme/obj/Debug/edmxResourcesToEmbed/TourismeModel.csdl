@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="tourismeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="site">
+    <Key>
+      <PropertyRef Name="NumSite" />
+    </Key>
+    <Property Name="NumSite" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NomSite" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Lieu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TarifJournaliere" Type="Int32" />
+  </EntityType>
+  <EntityType Name="visite">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="NumSite" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NumVisiteur" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NbJours" Type="Int32" />
+    <Property Name="DateVisite" Type="DateTime" Precision="0" />
+    <Property Name="id" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="visiteur">
+    <Key>
+      <PropertyRef Name="NumVisiteur" />
+    </Key>
+    <Property Name="NumVisiteur" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NomVisiteur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Adresse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="tourismeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="site" EntityType="Self.site" />
+    <EntitySet Name="visite" EntityType="Self.visite" />
+    <EntitySet Name="visiteur" EntityType="Self.visiteur" />
+  </EntityContainer>
+</Schema>

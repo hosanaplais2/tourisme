@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="tourismeModelStoreContainer" CdmEntityContainer="tourismeEntities">
+    <EntitySetMapping Name="site">
+      <EntityTypeMapping TypeName="tourismeModel.site">
+        <MappingFragment StoreEntitySet="site">
+          <ScalarProperty Name="NumSite" ColumnName="NumSite" />
+          <ScalarProperty Name="NomSite" ColumnName="NomSite" />
+          <ScalarProperty Name="Lieu" ColumnName="Lieu" />
+          <ScalarProperty Name="TarifJournaliere" ColumnName="TarifJournaliere" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="visite">
+      <EntityTypeMapping TypeName="tourismeModel.visite">
+        <MappingFragment StoreEntitySet="visite">
+          <ScalarProperty Name="NumSite" ColumnName="NumSite" />
+          <ScalarProperty Name="NumVisiteur" ColumnName="NumVisiteur" />
+          <ScalarProperty Name="NbJours" ColumnName="NbJours" />
+          <ScalarProperty Name="DateVisite" ColumnName="DateVisite" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="visiteur">
+      <EntityTypeMapping TypeName="tourismeModel.visiteur">
+        <MappingFragment StoreEntitySet="visiteur">
+          <ScalarProperty Name="NumVisiteur" ColumnName="NumVisiteur" />
+          <ScalarProperty Name="NomVisiteur" ColumnName="NomVisiteur" />
+          <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

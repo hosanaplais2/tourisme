@@ -1,0 +1,73 @@
+﻿@model tourisme.visite
+
+@{
+    ViewBag.Title = "Visiter";
+
+   
+    string donnee = ViewBag.Message;
+    char separt = '/';
+    string[] donnees = donnee.Split(separt);
+    string numero = donnees[0];
+
+
+}
+<div class="jumbotron">
+    <h6>numero</h6>
+    <h6>@ViewBag.Message</h6>
+    <p class="lead">veuillez remplir les informations suivantes</p>
+</div>
+
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>visite</h4>
+        <hr />
+        <div class="form-group">
+            <label>Numero du client</label>
+            <input type="text" id="NumVisiteur" name="NumVisiteur" value=@numero readonly="readonly" class="btn btn-default"/> 
+        </div>
+        <div class="form-group">
+            <label> Selectionner le site   :--</label><select id="NumSite" name="NumSite" class="btn ">
+
+                @for (int i = 1; i < donnees.Length; i = i + 2)
+                {
+
+
+                    <option value=@donnees[i]>@donnees[i + 1]</option>
+
+
+                }
+            </select>
+        </div>
+
+
+            <div class="form-group">
+                <label >Date du visite</label>
+                <input type="date" id="DateVisite" name="DateVisite" class="btn btn-default " />
+            </div>
+
+            <div class="form-group">
+                <label>Nombre de jours de visite</label>
+                <input type="number" min="1" id="nbJours" name="nbJours" class="btn btn-default"/>
+            </div>
+
+        
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<tourisme.visite>
+
+@{
+ 
+    string donnee = ViewBag.Message;
+    char separt = '/';
+    string[] donnees = donnee.Split(separt);
+    string num = donnees[0];
+    string nom = donnees[1];
+    string lieu = donnees[2];
+    int tarif = Convert.ToInt32(donnees[3]);
+    int montant = 0; int total = 0;
+    string nomVisiteur = "";
+    ViewBag.Title = "Site " + nom;
+}
+
+
+<br />
+<div class="row">
+    <div class="col-md-4">
+       <p>Nom du site :  <strong>@nom </strong></p>
+    </div>
+    <div class="col-md-4">
+        <p>Son emplacement :  <strong>@lieu</strong></p>
+    </div>
+    <div class="col-md-4">
+        <p>Son tarif Journaliére :  <strong>@tarif</strong> Ariary</p>
+    </div>
+</div>
+<table class="table" id="Tables">
+    <tr>
+        <th>
+            Visiteur
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateVisite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NbJours)
+        </th>
+        <th>
+            Montant
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.NumSite.Equals(num))
+        {
+            <tr>
+                <td>
+                    @for (int i = 4; i < donnees.Length; i = i + 2)
+                    {
+                        if (item.NumVisiteur.Equals(donnees[i])) { nomVisiteur = donnees[i + 1]; }
+                    }
+                    @nomVisiteur
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateVisite)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NbJours)
+                </td>
+                <td>
+                    @{
+                    montant = Convert.ToInt32(item.NbJours) * tarif;
+                    total += montant;
+                    }
+                    @montant
+                </td>
+
+            </tr>
+        }
+    }
+    <tr>
+        <td></td>
+        <td></td>
+        <td>TOTAL</td>
+        <td>@total Ariary</td>
+    </tr>
+</table>
+
+<a class="btnpdf btn btn-success"> download pdf</a>

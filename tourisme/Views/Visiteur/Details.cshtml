@@ -1,0 +1,66 @@
+﻿@model IEnumerable<tourisme.visite>
+
+@{
+   
+        ViewBag.Title = "Details visiteur";
+
+   
+    string donnee = ViewBag.Message;
+    char separt = '/';
+    string[] donnees = donnee.Split(separt);
+    string num = donnees[0];
+    string nom = donnees[1];
+    string adress = donnees[2];
+    string site = "";
+}
+<br />
+<div >
+    <div class="col-md-3 "><p class="text-info">Nom du touristes :</p><p>@nom</p></div>
+    <div class="col-md-3 "><p class="text-info">Son adresse :</p><p>@adress</p></div>
+    
+    
+</div>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NumSite)
+        </th>
+        <th>
+            Nom du site
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NbJours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateVisite)
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    if(item.NumVisiteur.Equals(num)){
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumSite)
+        </td>
+        <td>
+            @for (int i = 3; i < donnees.Length;i=i+2 )
+            {
+                if (item.NumSite.Equals(donnees[i])) { site = donnees[i + 1]; } 
+            }
+            @site
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NbJours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateVisite)
+        </td>
+        
+    </tr>
+}}
+
+
+</table>
+<a class="btnpdf btn btn-success"> download pdf</a>

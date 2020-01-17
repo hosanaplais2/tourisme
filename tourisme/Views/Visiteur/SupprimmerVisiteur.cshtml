@@ -1,0 +1,39 @@
+﻿@model tourisme.visiteur
+
+@{
+    ViewBag.Title = "Suppression Visiteur";
+
+}
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>visiteur</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomVisiteur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomVisiteur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adresse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adresse)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+    <input type="text" id="NumSiteSupp" name="NumVisiteurSupp" value=@ViewBag.Message readonly="readonly" hidden="hidden" />
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimmer" class="btn btn-default" /> |
+            @Html.ActionLink("Annuler", "Listvisiteur")
+        </div>
+    }
+</div>
